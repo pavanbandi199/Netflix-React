@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import netflixlogo from '../images/netflix logo.png'
 import { auth } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
-import { signOut } from 'firebase/auth';
-import { useSelector } from 'react-redux';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser, removeUser } from '../utils/userSlice';
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector((store)=> store.user)
 
     const handleSignOut =() =>{
@@ -15,6 +17,19 @@ const Header = () => {
         navigate('/error');
       });
     }
+    useEffect(()=>{
+      const unsubscribe =  onAuthStateChanged(auth, (user) => {
+          if (user) {
+            const {uid,email,displayName,photoURL} = user;
+            dispatch(addUser({uid:uid, email:email, displayName:displayName, photoURL:photoURL}));
+            navigate('/browse');
+          } else {
+            dispatch(removeUser());
+            navigate('/');
+          }
+        });
+        return () => unsubscribe();
+  },[])
 
   return (
         <div className='absolute w-full bg-gradient-to-b from-black bg-opacity-20 z-10 flex justify-between items-center'>

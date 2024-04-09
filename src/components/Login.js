@@ -6,6 +6,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfi
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../utils/userSlice';
+import { BGIMG, PROFILEIMG } from '../utils/constants';
 const Login = () => {
     const [isSignInForm,setIsSignInForm] = useState(true);
     const [errorMessage,setErrorMessage] = useState(null);
@@ -27,7 +28,7 @@ const Login = () => {
                 // Signed up 
                 const user = userCredential.user;
                 updateProfile(user, {
-                    displayName: name.current.value, photoURL: "https://avatars.githubusercontent.com/u/64477389?v=4"
+                    displayName: name.current.value, photoURL: PROFILEIMG
                   }).then(() => {
                     const {uid,email,displayName,photoURL} = auth.currentUser;
                     dispatch(addUser({uid:uid, email:email, displayName:displayName, photoURL:photoURL}));
@@ -65,7 +66,7 @@ const Login = () => {
     <div className=''>
         <Header/>
         <div className='absolute'>
-            <img className=''  src='https://assets.nflxext.com/ffe/siteui/vlv3/7ca5b7c7-20aa-42a8-a278-f801b0d65fa1/fb548c0a-8582-43c5-9fba-cd98bf27452f/IN-en-20240326-popsignuptwoweeks-perspective_alpha_website_small.jpg' alt='bg-img'/>
+            <img className=''  src={BGIMG} alt='bg-img'/>
         </div>
         <form onSubmit={(e) => e.preventDefault()} className='absolute my-36  mx-auto left-0 right-0 w-3/12 bg-black px-12 py-10 box-content bg-opacity-80  text-white'>
             <h1 className='text-2xl font-bold my-2 p-4'>{isSignInForm ? "Sign In" : "Sign Up" }</h1>
