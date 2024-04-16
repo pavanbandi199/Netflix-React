@@ -11,3 +11,9 @@ export const API_OPTIONS = {
  // eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4ZmRiZmMwZmI0ZTM5OGI5NTk3MDg0YTgxZTU4MjE2YiIsInN1YiI6IjYwMGE0YTBmMzkxYjljMDA0MWQyZTYzZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XpJwrpoB4upLIbaQpQwbzVvdoZPpnr9DKYZA_HIIaJ4
 
  export const CDN_IMG_URL = "https://image.tmdb.org/t/p/w500";
+ export const SUPPORTEDLANG = [
+    {identifer:"en", name:"English"},
+    {identifer:"hindi", name:"Hindi"},
+    {identifer:"telugu", name:"Telugu"},
+    {identifer:"spanish", name:"Spanish"}
+];
